@@ -1,38 +1,38 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var ExtractCSS = new ExtractTextPlugin('styles.css');
-var HtmlWebpack = new HtmlWebpackPlugin({template: './src/assets/html/index.html'});
+var path = require('path')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var ExtractCSS = new ExtractTextPlugin('styles.css')
+var HtmlWebpack = new HtmlWebpackPlugin({template: './src/client/assets/html/index.html'})
 
 module.exports = {
-  entry: path.resolve('./src/app.js'),
+  entry: path.resolve('./src/client/app.js'),
   output: {
     path: path.resolve('./dist'),
-    filename: "bundle.js",
+    filename: 'bundle.js',
     sourceMapFilename: 'bundle.map'
   },
-  devtool: '#eval-source-map',
+  devtool: '#cheap-eval-source-map',
   plugins: [
     // the index.html file is generated below
     HtmlWebpack,
     ExtractCSS
   ],
   resolve: {
-    root: path.resolve('./src/')
+    root: path.resolve('./src/client')
   },
   module: {
     loaders: [
       // js and jsx
       {
-        test: /\.jsx?$/i, 
+        test: /\.jsx?$/i,
         loader: 'babel',
         include: /src/,
         exclude: /(node_modules|bower_components|dist)/,
         query: {
-          presets: ['react', 'es2015', 'stage-2']
+          presets: ['react', 'es2015', 'stage-0']
         }
       },
-      
+
       // sass
       {
         test: /\.s?css$/i,
